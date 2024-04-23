@@ -9,6 +9,7 @@ import { auth, firestore } from "../../firebase";
 import { setDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { serverTimestamp } from "../../firebase";
+import DataTableRole from "../custom/datatable/DtRole";
 
 const PopupForm = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -24,45 +25,60 @@ const PopupForm = ({ isOpen, onClose }) => {
    students:'',
    documents:'',
    Timetable:'',
-   Assignment:''
-    
+   Assignment:'',
+   test:'',
+   settings:''
   });
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value, checked, type } = e.target;
+
+  if (type === 'checkbox') {
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: checked ? 'on' : '' // Update to 'on' if checked, empty string otherwise
+    }));
+  } else {
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const pagesAllowed = {
+        manageDashboard: formData.dashboard === 'on' ,
+        manageUser: formData.user === 'on',
+        manageTeachers: formData.teachers === 'on',
+        manageParent: formData.parent === 'on',
+        manageCertificates: formData.certificates === 'on',
+        manageClass: formData.class === 'on',
+        manageRole: formData.role === 'on',
+        manageSchool: formData.school === 'on',
+        manageStudents: formData.students === 'on',
+        manageDocuments: formData.documents === 'on',
+        manageTimetable: formData.Timetable === 'on',
+        manageAssignment: formData.Assignment === 'on',
+        manageTests: formData.test === 'on',
+        settings: formData.settings === 'on'
+      };
 
       // Create user document in Firestore
-      await setDoc(doc(firestore, "userRoles"), {
-        rolename: formData.role,
-        dashboard: formData.dashboard,
-        user:formData.user,
-        teachers:formData.teachers,
-        parent:formData.parent,
-        certificates:formData.certificates,
-        class:formData.class,
-        role:formData.role,
-        school:formData.school,
-        students:formData.students,
-        documents:formData.documents,
-        Timetable:formData.Timetable,
-        Assignment: formData.Assignment
+      await setDoc(doc(firestore, "userRoles",formData.rolename), {
+        rolename: formData.rolename,
+        pageAllowed:pagesAllowed,
       });
 
       console.log('Role Created', formData.rolename);
 
       // Optionally, clear the form after successful registration
       setFormData({
-        rolename: '',
-        dashboard: '',
+        rolename:'',
+        dashboard:'',
         user:'',
         teachers:'',
         parent:'',
@@ -73,7 +89,9 @@ const PopupForm = ({ isOpen, onClose }) => {
         students:'',
         documents:'',
         Timetable:'',
-        Assignment:''
+        Assignment:'',
+        test:'',
+        settings:''
 
       });
     } catch (error) {
@@ -98,7 +116,7 @@ const PopupForm = ({ isOpen, onClose }) => {
           <form onSubmit={handleFormSubmit}>
             <div className="form-group1">
               <label htmlFor="rolename">Role:</label>
-              <input type="text" id="displayName" name="displayName" value={formData.displayName} onChange={handleInputChange} required />
+              <input type="text" id="rolename" name="rolename" value={formData.rolename} onChange={handleInputChange} required />
             </div>
             <h2>Page 1</h2>
     <div className="form-group">
@@ -106,77 +124,90 @@ const PopupForm = ({ isOpen, onClose }) => {
         <div className="left-container">
           <label>
             <input
-              type="checkbox" id="dashboard" name="dashboard" value={formData.dashboard} onChange={handleInputChange}
+              type="checkbox" id="dashboard" name="dashboard" value='on' checked={formData.dashboard} onChange={handleInputChange}
             />
             Dashboard
           </label>
           <label>
             <input
-              type="checkbox" id="user" name="user" value={formData.user} onChange={handleInputChange}
+              type="checkbox" id="user" name="user"   value='on' checked={formData.user} onChange={handleInputChange}
             />
             Manage Users
           </label>
           <label>
             <input
-              type="checkbox" id="teachers" name="teachers" value={formData.teachers} onChange={handleInputChange}
+              type="checkbox" id="teachers" name="teachers"  value='on' checked={formData.teachers} onChange={handleInputChange}
             />
             Manage Teachers
           </label>
           <label>
             <input
-              type="checkbox" id="parents" name="parents" value={formData.parents} onChange={handleInputChange}
+              type="checkbox" id="parent" name="parent"  value='on' checked={formData.parent} onChange={handleInputChange}
             />
             Manage Parents
           </label>
           <label>
             <input
-              type="checkbox" id="certificates" name="certificates" value={formData.certificates} onChange={handleInputChange}
+              type="checkbox" id="certificates" name="certificates"  value='on' checked={formData.certificates} onChange={handleInputChange}
             />
             Manage Certificates
           </label>
           <label>
             <input
-              type="checkbox" id="classes" name="classes" value={formData.classes} onChange={handleInputChange}
+              type="checkbox" id="class" name="class"  value='on' checked={formData.class} onChange={handleInputChange}
             />
             Manage Classes
+          </label>
+          <label>
+            <input
+              type="checkbox" id="test" name="test" value='on' checked={formData.test} onChange={handleInputChange}
+            />
+            Manage Tests
           </label>
         </div>
         <div className="right-container">
           <label>
             <input
-              type="checkbox" id="roles" name="roles" value={formData.roles} onChange={handleInputChange}
+              type="checkbox" id="role" name="role"  value='on' checked={formData.role}  onChange={handleInputChange}
             />
             Manage Roles
           </label>
           <label>
             <input
-              type="checkbox" id="schools" name="schools" value={formData.schools} onChange={handleInputChange}
+              type="checkbox" id="school" name="school"  value='on' checked={formData.school} onChange={handleInputChange}
             />
             Manage Schools
           </label>
           <label>
             <input
-              type="checkbox" id="students" name="students" value={formData.students} onChange={handleInputChange}
+              type="checkbox" id="students" name="students"  value='on' checked={formData.students}  onChange={handleInputChange}
             />
             Manage Students
+
           </label>
           <label>
             <input
-              type="checkbox" id="documents" name="documents" value={formData.documents} onChange={handleInputChange}
+              type="checkbox" id="documents" name="documents"  value='on' checked={formData.documents}  onChange={handleInputChange}
             />
             Manage Documents
           </label>
           <label>
             <input
-              type="checkbox" id="Timetable" name="Timetable" value={formData.Timetable} onChange={handleInputChange}
+              type="checkbox" id="Timetable" name="Timetable"  value='on' checked={formData.Timetable}  onChange={handleInputChange}
             />
             Manage Timetable
           </label>
           <label>
             <input
-              type="checkbox" id="Assignment" name="Assignment" value={formData.Assignment} onChange={handleInputChange}
+              type="checkbox" id="Assignment" name="Assignment"   value='on' checked={formData.Assignment}  onChange={handleInputChange}
             />
             Manage Assignment 
+          </label>
+          <label>
+            <input
+              type="checkbox" id="settings" name="settings"  value='on' checked={formData.settings}  onChange={handleInputChange}
+            />
+            Settings
           </label>
         </div>
       </div>
@@ -193,6 +224,7 @@ const PopupForm = ({ isOpen, onClose }) => {
   );
 };
 function ManageRoles() {
+  
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
@@ -201,6 +233,23 @@ function ManageRoles() {
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
+  };
+
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+
+  const handleFromDateChange = (e) => {
+    setFromDate(e.target.value);
+    // Ensure that toDate is always after fromDate
+  
+  };
+
+  const handleToDateChange = (e) => {
+    // Update the "to" date only if it's manually selected by the user
+    const selectedToDate = e.target.value;
+    if (selectedToDate >= fromDate) {
+      setToDate(selectedToDate);
+    }
   };
   return (
     <>
@@ -215,15 +264,17 @@ function ManageRoles() {
           <h5>Default</h5>
         </div>
         <div className="row2">
-          <div class="date-row">
-            <label for="from-date">From:</label>
-            <input type="date" id="from-date" class="datepicker" placeholder="Select from date" />
+        <div class="date-row">
+                <label for="from-date">From:</label>
+                <input type="date" id="from-date" class="datepicker" placeholder="Select from date" value={fromDate}
+        onChange={handleFromDateChange} />
 
-            <label for="to-date">To:</label>
-            <input type="date" id="to-date" class="datepicker" placeholder="Select to date" />
+                <label for="to-date">To:</label>
+                <input type="date" id="to-date" class="datepicker"   placeholder="Select to date"  value={toDate} onChange={handleToDateChange}
+        min={fromDate}/>
 
-
-          </div>
+                
+            </div>
           <div className="searchInPage"><input type="search" name="search" id="search" placeholder="Ctrl+K" /></div>
           <button class="button" onClick={handleOpenPopup}>
             <span class="icon3"></span>
@@ -231,8 +282,10 @@ function ManageRoles() {
           </button>
           <PopupForm isOpen={isPopupOpen} onClose={handleClosePopup} />
         </div>
-
-
+        <div className="tablePartRole">
+        <DataTableRole></DataTableRole>
+        </div>
+        
 
       </div>
     </>
