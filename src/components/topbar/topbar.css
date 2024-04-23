@@ -1,0 +1,70 @@
+.main{
+    float: right;
+    margin-left: 270px;
+    width: 80%;
+    
+}
+.main {
+    
+    padding: 0 20px; /* Add padding to the main container */
+    background-color:white; /* Background color for the topbar */
+  }
+  
+  .topbarIcon {
+    background-color: white;
+    padding: 7px;
+   
+    /* align-self: center; */
+    margin: 10px; /* Add margin between icons */
+  }
+  
+  .search input {
+    padding: 0px 13px;
+    margin-top: 40px;
+    height: 30px; /* Adjust padding for the search input */
+    border: none; /* Remove border */
+    border-radius: 5px;
+    /* Add border radius */
+  }
+  .search  {
+    padding: 0px 10px;
+    margin-top: 4px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+/* Add border radius */
+  }
+  
+  .profile {
+    display: inline-flex;
+    width: 50%;
+    align-items: center; /* Center items vertically */
+  }
+  
+  .profile h5 {
+    margin-left: 20px; /* Add margin between icon and username */
+  }
+  .left{
+    display: inline-flex;
+    width: 60%;
+    justify-content: flex-start;
+  }
+  .right{
+    display: inline-flex;
+    width: 40%;
+    
+  }
+
+  .topbarIcon{
+    background: white;
+    margin: 40px;
+  }
+  .topbarIcon svg{
+    background-color: white;
+    margin-right: 0px;
+    margin: 4px;
+  }
+
+  .main .left button {
+    background-color: white;
+  }

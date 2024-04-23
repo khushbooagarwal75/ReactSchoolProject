@@ -1,0 +1,44 @@
+body{
+    display: flex;
+    position: fixed;
+    background-color:white;
+}
+
+.main{
+    position: fixed; /* Fixed position to keep it at the top */
+  top: 0; /* Align at the top of the viewport */
+  left: 0px; /* Leave space for the sidebar */
+  right: 0; /* Align to the right edge of the viewport */
+  height: 50px; /* Adjust height as needed */
+  display: flex;
+  justify-content: space-between; /* Align items with space between them */
+  align-items: center; /* Center items vertically */
+  padding: 0 20px; /* Add padding to the main container */
+  background-color: #f0f0f0; /* Background color for the topbar */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.icon {
+  margin-right: 10px; /* Add margin between icons */
+}
+
+.search input {
+  padding: 8px 12px; /* Adjust padding for the search input */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+}
+
+.profile {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.profile h2 {
+  margin-left: 5px; /* Add margin between icon and username */
+}
+
+.content .pageContent{
+  margin-top: 50px;
+  margin-left:300px;
+ 
+}

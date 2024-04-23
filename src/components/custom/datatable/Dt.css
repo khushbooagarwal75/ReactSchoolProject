@@ -1,0 +1,75 @@
+/* DataTable component styles */
+
+/* Container style */
+.data-table-container {
+    height: 400px; /* Set the height */
+    width: 100%; /* Set the width */
+  }
+  
+  /* DataGrid styles */
+  .data-grid {
+    height: 100%; /* Occupy the entire height of the container */
+  }
+  
+  /* Header row styles */
+  .data-grid .header {
+    background-color: #f0f0f0; /* Light gray background color */
+    color: #333; /* Dark gray text color */
+    font-weight: bold; /* Bold font weight */
+  }
+  
+  /* Even rows styles */
+  .data-grid .even {
+    background-color: #f9f9f9; /* Lighter gray background color */
+  }
+  
+  /* Odd rows styles */
+  .data-grid .odd {
+    background-color: #ffffff; /* White background color */
+  }
+  
+  /* Selected row styles */
+  .data-grid .selected {
+    background-color: #d6e6ff; /* Light blue background color */
+  }
+  
+  /* Cell styles */
+  .data-grid .cell {
+    padding: 5px; /* Add padding to cells */
+    border-bottom: 1px solid #ccc; /* Add bottom border to separate cells */
+  }
+  
+  /* Cell hover styles */
+  .data-grid .cell:hover {
+    background-color: #f0f0f0; /* Light gray background color on hover */
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    display: flex; /* Use flexbox for pagination */
+    justify-content: center; /* Center align pagination */
+    margin-top: 10px; /* Add top margin */
+  }
+  
+  /* Pagination button styles */
+  .pagination-button {
+    padding: 5px 10px; /* Add padding to buttons */
+    margin: 0 5px; /* Add margin between buttons */
+    border: 1px solid #ccc; /* Add border to buttons */
+    cursor: pointer; /* Set cursor to pointer */
+  }
+  
+  /* Active pagination button styles */
+  .pagination-button.active {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Disabled pagination button styles */
+  .pagination-button.disabled {
+    color: #ccc; /* Light gray text color */
+    cursor: not-allowed; /* Set cursor to not-allowed */
+  }
+  
+  /* End of DataTable component styles */
+  

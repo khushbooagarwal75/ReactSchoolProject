@@ -1,0 +1,108 @@
+.sidebar {
+   height: 100%;
+   overflow-y: auto;
+   
+   display: flex;
+   position: fixed;
+   background-color: #f0f0f0; /* Background color for the sidebar */
+   width: 300px; /* Set the width of the sidebar */
+ }
+ nav{
+  background-color: #f0f0f0;
+  width: 270px;
+  display: flex;
+  list-style: none;
+  float: left;
+  flex-direction: column;
+  height: 100vh;
+ }
+ .sidebar .container {
+   margin-top: 0px;
+   list-style: none;
+   height: 100%;
+   padding: 0px;
+   width: 270px;
+ }
+ 
+ .menu {
+   padding: 0;
+   margin: 0;
+   background: #f0f0f0;
+   list-style: none;
+ }
+ svg{
+  margin-right: 20px;
+ }
+ 
+ .box {
+   padding: 10px;
+   width: 240px;
+   list-style: none;
+   background-color: #f0f0f0;
+   position: relative; /* Make the box position relative */
+ }
+
+ .box a{
+  color: #000;
+  text-decoration: none;
+ }
+ 
+ .box:hover {
+   background-color: #ccc;
+ }
+
+ .boxedit{
+  padding: 10px;
+  width:180px;
+  background-color: #ccc;
+  list-style: none;
+  position: relative; /* Make the box position relative */
+}
+ 
+ .submenu {
+   display: none; /* Initially hide submenu */
+   position: absolute; /* Position it absolutely */
+   top: 100%; /* Position it below the box */
+   left: 0; /* Align it with the left edge of the box */
+   background-color: #fff; /* Background color for the submenu */
+   border: 1px solid #ccc; /* Add border */
+   padding: 10px;
+   
+   z-index: 1; /* Ensure submenu appears above other content */
+ }
+ 
+ .box:hover .submenu {
+   display: block;
+   list-style: none;
+   height: 50px;
+   background-color: #f0f0f0; /* Show submenu when box is hovered */
+ }
+.app_head{
+
+   width: 270px;
+   background: #f0f0f0;
+}
+.app_head h1{
+  color: #000;
+  margin-top: 0px;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+span{
+  margin: 15px;
+}
+
+nav ul{
+  padding-left: 0px;
+}
+
+.arrow{
+  margin-left: 130px;
+}
+
+button{
+  border: none;
+}
+button:hover{
+  background-color: #f0f0f0;
+}
